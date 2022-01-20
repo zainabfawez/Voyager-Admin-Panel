@@ -65,12 +65,12 @@
                                          src="{{ filter_var($dataTypeContent->{$row->field}, FILTER_VALIDATE_URL) ? $dataTypeContent->{$row->field} : Voyager::image($dataTypeContent->{$row->field}) }}">
                                 @endif
                             @elseif($row->type == 'relationship')
-
-                                {{-- need to know the id of the item for the route  --}}
-                                <a href="{{ route('voyager.'.$row->display_name.'.update', '15') }}"> 
+                                
+                               
+                                <a href="http://127.0.0.1:8000/admin"> 
                                     @include('voyager::formfields.relationship', ['view' => 'read', 'options' => $row->details])
                                 </a>
-
+                              
                             @elseif($row->type == 'select_dropdown' && property_exists($row->details, 'options') &&
                                     !empty($row->details->options->{$dataTypeContent->{$row->field}})
                             )
