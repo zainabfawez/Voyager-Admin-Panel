@@ -66,8 +66,8 @@
                                 @endif
                             @elseif($row->type == 'relationship')
                                 
-                               
-                                <a href="http://127.0.0.1:8000/admin"> 
+                               {{-- need to know the id of the kit for the route  --}}
+                                <a href="{{ route('voyager.'.$row->details->table.'.update', '15') }}"> 
                                     @include('voyager::formfields.relationship', ['view' => 'read', 'options' => $row->details])
                                 </a>
                               
