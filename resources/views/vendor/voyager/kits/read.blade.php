@@ -65,7 +65,8 @@
                                          src="{{ filter_var($dataTypeContent->{$row->field}, FILTER_VALIDATE_URL) ? $dataTypeContent->{$row->field} : Voyager::image($dataTypeContent->{$row->field}) }}">
                                 @endif
                             @elseif($row->type == 'relationship')
-
+                                <p>row: <br> {{$row}} </p>
+                                <p> dataTypeContent <br> {{$dataTypeContent}} </p>
                                 {{-- need to know the id of the item for the route  --}}
                                 <a href="{{ route('voyager.'.$row->display_name.'.update', '15') }}"> 
                                     @include('voyager::formfields.relationship', ['view' => 'read', 'options' => $row->details])
