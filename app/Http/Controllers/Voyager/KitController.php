@@ -278,7 +278,8 @@ class KitController extends \TCG\Voyager\Http\Controllers\Controller
             $newRow->type = 'relationship';
             $newRow->display_name = $request->relationship_table;
             $newRow->required = 0;
-
+             
+            
             foreach (['browse', 'read', 'edit', 'add', 'delete'] as $check) {
                 $newRow->{$check} = 1;
             }
@@ -353,5 +354,12 @@ class KitController extends \TCG\Voyager\Http\Controllers\Controller
             'message'    => 'Successfully deleted relationship.',
             'alert-type' => 'success',
         ]);
+    }
+
+    // My function
+    public function getItemId ($table, $attribute, $value)
+    {
+        $id = DB::table($table)->select('id')->where($attribute, 'like', $value)->get();
+        return $id;
     }
 }
