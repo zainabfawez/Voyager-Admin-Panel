@@ -26,6 +26,6 @@ class Kit extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(MyCategory::class, 'category_kit', 'kit_id', 'category_id');
+        return $this->belongsToMany(MyCategory::class, 'category_kit', 'kit_id', 'my_category_id');
     }
 }

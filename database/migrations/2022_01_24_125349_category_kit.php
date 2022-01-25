@@ -19,6 +19,8 @@ class CategoryKit extends Migration
             $table->integer('kit_id');
             $table->timestamps();
         });
+
+
     }
 
     /**

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class MyCategories extends Migration
+class RenameCategoryIdToMyCategoryIdInCategoryKitTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class MyCategories extends Migration
      */
     public function up()
     {
-        Schema::create('my_categories', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->timestamps();
+        Schema::table('category_kit', function (Blueprint $table) {
+            $table->renameColumn('category_id', 'my_category_id');
         });
-
-        
     }
 
     /**
@@ -29,6 +25,8 @@ class MyCategories extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('category_kit', function (Blueprint $table) {
+            $table->renameColumn('my_category_id', 'category_id');
+        });
     }
 }

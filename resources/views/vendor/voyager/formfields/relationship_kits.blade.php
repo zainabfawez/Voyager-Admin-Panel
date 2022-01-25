@@ -16,7 +16,11 @@
                 @endphp
 
                 @if(isset($query))
-                    <p>{{ $query->{$options->label} }} </p>
+
+                {{-- added linked --}}
+                <a href="{{ route('voyager.'.$row->details->table.'.update',  $query->{$options->key}) }}"> 
+                    <p>{{ $query->{$options->label} }} </p>                
+                </a>
                 
                 @else
                     <p>{{ __('voyager::generic.no_results') }}</p>
