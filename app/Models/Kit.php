@@ -9,6 +9,8 @@ class Kit extends Model
 {
     use HasFactory;
 
+    protected $table = 'kits';
+
     protected $fillable = [
         'name',
         'user_id',

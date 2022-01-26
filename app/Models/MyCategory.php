@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class MyCategory extends Model
 {
     use HasFactory;
+    protected $table = 'my_categories';
 
     public function kits()
     {

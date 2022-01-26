@@ -93,13 +93,8 @@
                         <p>{{ __('voyager::generic.no_results') }}</p>
                     @else
                         <ul>
-                            @foreach($selected_values as $selected_value)
-
-                                {{-- added link  --}}
-                                <a href="{{ route('voyager.'.$row->details->table.'.update',  $selected_value->{$options->key}) }}"> 
+                            @foreach($selected_values as $selected_value)                   
                                     <li>{{ $selected_value->{$options->label} }}</li>
-                                </a> 
-
                             @endforeach
                         </ul>
                     @endif
@@ -131,10 +126,9 @@
 
                 @php
                     $relationshipData = (isset($data)) ? $data : $dataTypeContent;
-
                     $selected_values = isset($relationshipData) ? $relationshipData
                     ->belongsToMany($options->model, $options->pivot_table, $options->foreign_pivot_key ?? null, $options->related_pivot_key ?? null, $options->parent_key ?? null, $options->key)
-                    ->get()->map(function ($item, $key) use ($options) {
+                    ->get()->map(function ($item, $key) use ($options){
                         // added function by me
                         $data = array();
                         $name = $item->{$options->label};
@@ -142,9 +136,9 @@
                         array_push($data, $name);
                         array_push($data, $id);
                         return $data;
-            		})->all() : array();
+                    })->all() : array();
+                    //dd($selected_values[0][1]);
                 @endphp
-
                 @if($view == 'browse')
                     @php
                         $string_values = implode(", ", $selected_values);
@@ -154,6 +148,7 @@
                         <p>{{ __('voyager::generic.no_results') }}</p>
                     @else
                         <p>{{ $string_values }}</p>
+                       
                     @endif
                 @else
                     @if(empty($selected_values))
@@ -161,13 +156,9 @@
                     @else
                         <ul>
                             @foreach($selected_values as $selected_value)
-                                  {{-- added link and fixing table name  --}}
-                                @php
-                                    $table = str_replace("_", "-",$row->details->table);
-                                @endphp
-                                <a href="{{ route('voyager.'.$table.'.update',  $selected_value[1]) }}"> 
+                                {{-- added link --}}
+                                <a href="{{ route('voyager.'.$row->details->table.'.update', $selected_value[1]) }}"> 
                                     <li>{{ $selected_value[0] }}</li>
-                                  
                                 </a>
                             @endforeach
                         </ul>

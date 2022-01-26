@@ -9,6 +9,8 @@ class Item extends Model
 {
     use HasFactory;
 
+    protected $table = 'items';
+
     public function kit()
     {
         return $this->belongsTo(Kit::class);
