@@ -18,7 +18,7 @@ class KitFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
+            'name' => $this->faker->name(),
             'user_id'=>$this->faker->unique()->numberBetween(1,25),
         ];
     }

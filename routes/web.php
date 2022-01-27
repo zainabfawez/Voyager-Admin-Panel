@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,5 +20,6 @@ Route::get('/', function () {
 
 
 Route::group(['prefix' => 'admin'], function () {
+    Route::get('items/approve','App\Http\Controllers\Voyager\ItemController@approveItem')->name('items.approve');
     Voyager::routes();
 });

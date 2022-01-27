@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use TCG\Voyager\Http\Controllers\VoyagerBreadController;
 use App\Http\Controllers\Voyager\KitController;
+use Illuminate\Events\Dispatcher;
+use TCG\Voyager\Facades\Voyager;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -26,6 +28,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Voyager::addAction(\App\Actions\Approve::class);
     }
 }
