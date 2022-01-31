@@ -13,7 +13,7 @@ class Approve extends AbstractAction
 
     public function getIcon()
     {
-        return $this->data->{'approved'} == 0 ?'voyager-x':'voyager-check';
+        return $this->data->{'approved'} == 0 ?'voyager-alarm-clock':'voyager-check';
     }
 
     public function shouldActionDisplayOnDataType()
@@ -25,7 +25,9 @@ class Approve extends AbstractAction
     public function getAttributes()
     {
         return [
-            'class' => 'btn btn-sm btn-primary pull-right',
+            'class' => 'btn btn-sm btn-success pull-right',
+            'style' => 'margin-right: 5px',
+            // 'disabled' => $this->data->{'approved'} == 0 ? 'false':'true',
         ];
     }
 

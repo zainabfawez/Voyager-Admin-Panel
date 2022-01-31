@@ -12,15 +12,37 @@
                 @php
                     $relationshipData = (isset($data)) ? $data : $dataTypeContent;
                     $model = app($options->model);
-                    $query = $model::where($options->key,$relationshipData->{$options->column})->first();
+                    $query = $model::where($options->key, $relationshipData->{$options->column})->first();
+                   
                 @endphp
 
                 @if(isset($query))
 
                 {{-- added linked --}}
                 <a href="{{ route('voyager.'.$row->details->table.'.update',  $query->{$options->key}) }}"> 
-                    <p>{{ $query->{$options->label} }} </p>                
+                    <p>{{ $query->{$options->label} }} </p>  
                 </a>
+
+                {{-- table to display the details of kits --}}
+                <table class="table">
+                    <thead>
+                        <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">name</th>
+                        <th scope="col">creadted at</th>
+                        <th scope="col">updated at</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <td>{{$query->id}}</td>
+                        <td>{{$query->name}}</td>
+                        <td>{{$query->created_at}}</td>
+                        <td>{{$query->updated_at}}</td>
+                        </tr>
+                    
+                    </tbody>
+                </table>
                 
                 @else
                     <p>{{ __('voyager::generic.no_results') }}</p>

@@ -46,6 +46,7 @@
                         @endphp
                         <div class="panel-heading" style="border-bottom:0;">
                             <h3 class="panel-title">{{ $row->getTranslatedAttribute('display_name') }}</h3>
+                         
                         </div>
 
                         <div class="panel-body" style="padding-top:0;">
@@ -125,8 +126,16 @@
                                     </a>
                                 @endif
                             @else
-                                @include('voyager::multilingual.input-hidden-bread-read')
-                                <p>{{ $dataTypeContent->{$row->field} }}</p>
+                                {{-- displaying json data --}}
+                                @if ( $row->getTranslatedAttribute('display_name') == 'Description')
+
+                                    {{-- @php   dd(json_decode($dataTypeContent-> {$row->field})); @endphp --}}
+                                    {{-- @php   dd( $dataTypeContent->{$row->field}); @endphp --}}
+                                    <p>{{ $dataTypeContent->{$row->field} }}</p>
+                                @else
+                                    @include('voyager::multilingual.input-hidden-bread-read')
+                                    <p>{{ $dataTypeContent->{$row->field} }}</p>
+                                @endif
                             @endif
                         </div><!-- panel-body -->
                         @if(!$loop->last)

@@ -74,7 +74,7 @@
                 @php
                     $relationshipData = (isset($data)) ? $data : $dataTypeContent;
                     $model = app($options->model);
-                    $selected_values = $model::where($options->column, '=', $relationshipData->{$options->key})->get();
+                    $selected_values = $model::where($options->column, $relationshipData->{$options->key})->get();
                 @endphp
 
                   
@@ -94,11 +94,41 @@
                     @else
                         <ul>
                             @foreach($selected_values as $selected_value)
-
                                 {{-- added link  --}}
-                                <a href="{{ route('voyager.'.$row->details->table.'.update',  $selected_value->{$options->key}) }}"> 
-                                    <li>{{ $selected_value->{$options->label} }}</li>
-                                </a> 
+                                <div  style="display:flex; flex-direction: row;">
+                                    <a href="{{ route('voyager.'.$row->details->table.'.update',  $selected_value->{$options->key}) }}"> 
+                                        <li>{{ $selected_value->{$options->label} }}</li>
+                                    </a> 
+                                    <button 
+                                        class="btn" 
+                                        type="button" 
+                                        id="btn" 
+                                        style="padding: 2px; height: 20px; margin-left: 15px"
+                                        >
+                                            <i class="voyager-double-down"></i>
+                                    </button>
+                                </div>
+                                {{-- table to display the details of kits --}}
+                                <div class="table-responsive" id="tableDiv" style="display: block">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                            <th scope="col">id</th>
+                                            <th scope="col">name</th>
+                                            <th scope="col">description</th>
+                                            <th scope="col">approved</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                            <td>{{$selected_value->id}}</td>
+                                            <td>{{$selected_value->name}}</td>
+                                            <td>{{$selected_value->description}}</td>
+                                            <td>{{$selected_value->approved}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
 
                             @endforeach
                         </ul>
@@ -228,3 +258,16 @@
     @endif
 
 @endif
+
+<script> 
+    //window.onload = function(){
+        var x = document.getElementById('tableDiv').style.display;
+        var y = document.getElementById("btn").className;
+        document.getElementById('btn').addEventListener("click" ,function()
+        {   
+            console.log('hi');
+            (y == 'voyager-double-up')? 'voyager-double-up':'voyager-double-down';
+            (x == 'none')? 'block':'none';
+        });
+    //}
+</script>
