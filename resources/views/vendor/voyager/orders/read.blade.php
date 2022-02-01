@@ -8,14 +8,12 @@
         <i class="{{ $dataType->icon }}"></i> {{ __('voyager::generic.viewing') }} {{ ucfirst($dataType->getTranslatedAttribute('display_name_singular')) }} &nbsp;
 
         @can('edit', $dataTypeContent)
-            <a href="{{ route('voyager.'.$dataType->slug.'.edit', $dataTypeContent->getKey()) }}" class="btn btn-info">
-                <i class="glyphicon glyphicon-pencil"></i> <span class="hidden-xs hidden-sm">{{ __('voyager::generic.edit') }}</span>
-            </a>
-            {{-- my button --}}
-            <p>
-                <button id="generatePDF">generate PDF</button>
-            </p>
+           
+                <a href="{{ route('voyager.'.$dataType->slug.'.edit', $dataTypeContent->getKey()) }}" class="btn btn-info">
+                    <i class="glyphicon glyphicon-pencil"></i> <span class="hidden-xs hidden-sm">{{ __('voyager::generic.edit') }}</span>
+                </a> 
         @endcan
+
         @can('delete', $dataTypeContent)
             @if($isSoftDeleted)
                 <a href="{{ route('voyager.'.$dataType->slug.'.restore', $dataTypeContent->getKey()) }}" title="{{ __('voyager::generic.restore') }}" class="btn btn-default restore" data-id="{{ $dataTypeContent->getKey() }}" id="restore-{{ $dataTypeContent->getKey() }}">
@@ -33,6 +31,7 @@
         </a>
         @endcan
     </h1>
+   
     @include('voyager::multilingual.language-selector')
 @stop
 
@@ -146,7 +145,13 @@
             </div>
         </div>
     </div>
-    <div id="editor"></div>
+
+    {{-- added button to download pdf report --}}
+    <button class="btn btn-sm btn-success pull-right" id="generatePDF" style="margin-left:-3px">
+        <i class="voyager-download"></i>
+        Export PDF
+    </button>
+
 
     {{-- Single delete modal --}}
     <div class="modal modal-danger fade" tabindex="-1" id="delete_modal" role="dialog">
@@ -197,23 +202,20 @@
 
     </script>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{-- Generating pdf file  --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+    <script src="jspdf.min.js"></script>
+    <script src="jspdf.plugin.autotable.min.js"></script>
 
     <script type="text/javascript">
         var doc = new jsPDF();
-        var specialElementHandlers = {
-            '#editor': function (element, renderer) {
-                return true;
-            }
-        };
-        
-        
+      
         $('#generatePDF').click(function () {
             doc.fromHTML($('#pdf').html(), 15, 15, {
-                'width': 700,
-                'elementHandlers': specialElementHandlers
+                'width': 700,  
             });
+
+            // doc.autoTable({ html: '#pdf' })
             doc.save('sample_file.pdf');
         });
     </script>
