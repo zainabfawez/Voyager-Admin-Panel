@@ -131,7 +131,19 @@
 
                                     {{-- @php   dd(json_decode($dataTypeContent-> {$row->field})); @endphp --}}
                                     {{-- @php   dd( $dataTypeContent->{$row->field}); @endphp --}}
-                                    <p>{{ $dataTypeContent->{$row->field} }}</p>
+                                    {{-- <p>{{ $dataTypeContent->{$row->field} }}</p> --}}
+                                    <div class = "table-responsive" >
+                                        <table class="table table-bordered table-hover">
+                                            @foreach (json_decode($dataTypeContent-> {$row->field}) as $key=>$value)
+                                             
+                                                    <tr>
+                                                        <th scope="col">{{$key}}</th>
+                                                        <td>{{$value}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            @endforeach
+                                        </table>
+                                    </div>  
                                 @else
                                     @include('voyager::multilingual.input-hidden-bread-read')
                                     <p>{{ $dataTypeContent->{$row->field} }}</p>
