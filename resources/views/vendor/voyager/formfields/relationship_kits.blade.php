@@ -94,22 +94,30 @@
                     @else
                         <ul>
                             @foreach($selected_values as $selected_value)
-                                {{-- added link  --}}
-                                <div  style="display:flex; flex-direction: row;">
-                                    <a href="{{ route('voyager.'.$row->details->table.'.update',  $selected_value->{$options->key}) }}"> 
+                                {{-- added link and button to show table  --}}
+                                <div  style="display:flex; flex-direction:row; justify-content:left; ">
+                                    <a 
+                                        href="{{ route('voyager.'.$row->details->table.'.update',  $selected_value->{$options->key}) }}" 
+                                       
                                         <li>{{ $selected_value->{$options->label} }}</li>
                                     </a> 
                                     <button 
-                                        class="btn" 
-                                        type="button" 
-                                        id="btn" 
-                                        style="padding: 2px; height: 20px; margin-left: 15px"
-                                        >
-                                            <i class="voyager-double-down"></i>
+                                        class = "btn" 
+                                        type = "button"
+                                        id = {{$selected_value->id}}  
+                                        onclick = "myFunction(this)" 
+                                        style = "padding:2px; height:20px; margin-left:15px; "
+                                    >
+                                        <i  onclick = "myFunction2(this)" class="voyager-double-down" id = "icon_{{$selected_value->id}}"></i>
                                     </button>
                                 </div>
+
                                 {{-- table to display the details of kits --}}
-                                <div class="table-responsive" id="tableDiv" style="display: block">
+                                <div 
+                                    class = "table-responsive" 
+                                    id = "table_{{$selected_value->id}}" 
+                                    style = "display:none" 
+                                >
                                     <table class="table table-bordered table-hover">
                                         <thead>
                                             <tr>
@@ -260,14 +268,24 @@
 @endif
 
 <script> 
-    //window.onload = function(){
-        var x = document.getElementById('tableDiv').style.display;
-        var y = document.getElementById("btn").className;
-        document.getElementById('btn').addEventListener("click" ,function()
-        {   
-            console.log('hi');
-            (y == 'voyager-double-up')? 'voyager-double-up':'voyager-double-down';
-            (x == 'none')? 'block':'none';
-        });
-    //}
+    function myFunction (e)
+    {    
+        var id = e.getAttribute('id');
+        var table = document.getElementById('table_'+id);
+        //(x.className == 'voyager-double-up')? 'voyager-double-up':'voyager-double-down';
+        //(table.style.display == 'none')? 'block':'none';
+        if (table.style.display === 'none') 
+            table.style.display = 'block';
+        else
+            table.style.display = 'none';       
+    }
+
+    function myFunction2 (e)
+    {    
+        var id = e.getAttribute('id');
+        if (e.className === 'voyager-double-down') 
+            e.className = 'voyager-double-up'
+        else
+            e.className = 'voyager-double-down';       
+    }
 </script>
