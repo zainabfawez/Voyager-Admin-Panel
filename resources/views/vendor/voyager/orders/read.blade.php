@@ -205,7 +205,7 @@
     {{-- Generating pdf file  --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
     <script src="jspdf.min.js"></script>
-    <script src="jspdf.plugin.autotable.min.js"></script>
+   
 
     <script type="text/javascript">
         var doc = new jsPDF();
@@ -215,7 +215,7 @@
                 'width': 700,  
             });
 
-            // doc.autoTable({ html: '#pdf' })
+          
             doc.save('sample_file.pdf');
         });
     </script>
