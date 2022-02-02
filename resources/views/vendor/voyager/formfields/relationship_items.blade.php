@@ -24,7 +24,7 @@
                 </a>
 
                 {{-- table to display the details of kits --}}
-                <table class="table">
+                {{-- <table class="table">
                     <thead>
                         <tr>
                         <th scope="col">id</th>
@@ -42,7 +42,7 @@
                         </tr>
                     
                     </tbody>
-                </table>
+                </table> --}}
                 
                 @else
                     <p>{{ __('voyager::generic.no_results') }}</p>

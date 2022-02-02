@@ -46,7 +46,6 @@
                         @endphp
                         <div class="panel-heading" style="border-bottom:0;">
                             <h3 class="panel-title">{{ $row->getTranslatedAttribute('display_name') }}</h3>
-                         
                         </div>
 
                         <div class="panel-body" style="padding-top:0;">
@@ -126,24 +125,20 @@
                                     </a>
                                 @endif
                             @else
+
                                 {{-- displaying json data --}}
                                 @if ( $row->getTranslatedAttribute('display_name') == 'Description')
-
-                                    {{-- @php   dd(json_decode($dataTypeContent-> {$row->field})); @endphp --}}
-                                    {{-- @php   dd( $dataTypeContent->{$row->field}); @endphp --}}
-                                    {{-- <p>{{ $dataTypeContent->{$row->field} }}</p> --}}
-                                    <div class = "table-responsive" >
-                                        <table class="table table-bordered table-hover">
+                                    <div style="width: 100px" >
+                                        <table class="table table-bordered table-hover ">
                                             @foreach (json_decode($dataTypeContent-> {$row->field}) as $key=>$value)
-                                             
                                                     <tr>
-                                                        <th scope="col">{{$key}}</th>
+                                                        <th scope="row" style="font-weight: bold;">{{$key}}</th>
                                                         <td>{{$value}}</td>
                                                     </tr>
-                                                </tbody>
                                             @endforeach
                                         </table>
                                     </div>  
+                                    
                                 @else
                                     @include('voyager::multilingual.input-hidden-bread-read')
                                     <p>{{ $dataTypeContent->{$row->field} }}</p>

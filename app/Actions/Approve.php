@@ -18,7 +18,7 @@ class Approve extends AbstractAction
 
     public function shouldActionDisplayOnDataType()
     {
-        // show or hide the action button, in this case will show for posts model
+        // show or hide the action button, in this case will show for items model
         return $this->dataType->slug == 'items';
     }
 
@@ -27,13 +27,12 @@ class Approve extends AbstractAction
         return [
             'class' => 'btn btn-sm btn-success pull-right',
             'style' => 'margin-right: 5px',
-            // 'disabled' => $this->data->{'approved'} == 0 ? 'false':'true',
         ];
     }
 
     // public function shouldActionDisplayOnRow($row)
     // {
-    //     return $row->id = 1;
+    //     return $row->{'approved'} == 0;
     // }
 
     public function getDefaultRoute()
