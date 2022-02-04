@@ -42,20 +42,21 @@
              
             <div class="col-md-12">
                
-                <div class="panel panel-bordered" style="padding-bottom:5px;" id="pdf" >
+                <div class="panel panel-bordered" style="padding-bottom:5px;">
                     <!-- form start -->
-                 
+                    <table class="table table-bordered" id="table_pdf">
                     @foreach($dataType->readRows as $row)
                         @php
                         if ($dataTypeContent->{$row->field.'_read'}) {
                             $dataTypeContent->{$row->field} = $dataTypeContent->{$row->field.'_read'};
                         }
                         @endphp
-                        
-                        <div class="panel-heading" style="border-bottom:0;">
+                        <tr>
+                        <td>   <h3 class="panel-title">{{ $row->getTranslatedAttribute('display_name') }}</h3></td>
+                        {{-- <div class="panel-heading" style="border-bottom:0;">
                             <h3 class="panel-title">{{ $row->getTranslatedAttribute('display_name') }}</h3>
-                        </div>
-                        
+                        </div> --}}
+                        <td>
                         <div class="panel-body" style="padding-top:0;">
                             @if (isset($row->details->view))
                                 @include($row->details->view, ['row' => $row, 'dataType' => $dataType, 'dataTypeContent' => $dataTypeContent, 'content' => $dataTypeContent->{$row->field}, 'action' => 'read', 'view' => 'read', 'options' => $row->details])
@@ -137,22 +138,17 @@
                                 <p>{{ $dataTypeContent->{$row->field} }}</p>
                             @endif
                         </div><!-- panel-body -->
-                   
-                        @if(!$loop->last)
+                    </td>
+                    </tr>
+                        {{-- @if(!$loop->last)
                             <hr style="margin:0;">
-                        @endif
+                        @endif --}}
                     @endforeach
-               
+                </table>
                 </div>
             </div>
         </div>
     </div>
-
-    {{-- added button to download pdf report --}}
-    <button class="btn btn-sm btn-success pull-right" id="generatePDF" style="margin-left:-3px">
-        <i class="voyager-download"></i>
-        Export PDF
-    </button>
 
 
     {{-- Single delete modal --}}
@@ -200,24 +196,6 @@
                 : deleteFormAction + '/' + $(this).data('id');
 
             $('#delete_modal').modal('show');
-        });
-
-    </script>
-
-    {{-- Generating pdf file  --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
-    <script src="jspdf.min.js"></script>
-   
-
-    <script type="text/javascript">
-        var doc = new jsPDF();
-        $('#generatePDF').click(function () {
-            doc.fromHTML($('#pdf').html(), 15, 15, {
-                'width': 700,  
-            });
-
-          
-            doc.save('sample_file.pdf');
         });
     </script>
 @stop

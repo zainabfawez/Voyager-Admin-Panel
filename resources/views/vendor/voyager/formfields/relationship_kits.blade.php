@@ -98,7 +98,7 @@
                                 <div  style="display:flex; flex-direction:row; justify-content:left; ">
                                     <a 
                                         href="{{ route('voyager.'.$row->details->table.'.update',  $selected_value->{$options->key}) }}" 
-                                       
+                                    >  
                                         <li>{{ $selected_value->{$options->label} }}</li>
                                     </a> 
                                     <button 

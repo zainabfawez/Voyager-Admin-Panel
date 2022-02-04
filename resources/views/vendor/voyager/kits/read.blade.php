@@ -35,7 +35,7 @@
     <div class="page-content read container-fluid">
         <div class="row">
             <div class="col-md-12">
-
+                <table class="table table-bordered">
                 <div class="panel panel-bordered" style="padding-bottom:5px;">
                     <!-- form start -->
                     @foreach($dataType->readRows as $row)
@@ -44,10 +44,12 @@
                             $dataTypeContent->{$row->field} = $dataTypeContent->{$row->field.'_read'};
                         }
                         @endphp
-                        <div class="panel-heading" style="border-bottom:0;">
+                        <tr>
+                        <td><h3 class="panel-title">{{ $row->getTranslatedAttribute('display_name') }}</h3></td>
+                        {{-- <div class="panel-heading" style="border-bottom:0;">
                             <h3 class="panel-title">{{ $row->getTranslatedAttribute('display_name') }}</h3>
-                        </div>
-
+                        </div> --}}
+                        <td>
                         <div class="panel-body" style="padding-top:0;">
                             @if (isset($row->details->view))
                                 @include($row->details->view, ['row' => $row, 'dataType' => $dataType, 'dataTypeContent' => $dataTypeContent, 'content' => $dataTypeContent->{$row->field}, 'action' => 'read', 'view' => 'read', 'options' => $row->details])
@@ -129,12 +131,15 @@
                                 <p>{{ $dataTypeContent->{$row->field} }}</p>
                             @endif
                         </div><!-- panel-body -->
-                        @if(!$loop->last)
+                        {{-- @if(!$loop->last)
                             <hr style="margin:0;">
-                        @endif
+                        @endif --}}
+                        </td>
+                        </tr>
                     @endforeach
 
                 </div>
+                </table>
             </div>
         </div>
     </div>
