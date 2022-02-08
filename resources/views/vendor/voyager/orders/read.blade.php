@@ -30,12 +30,22 @@
             <i class="glyphicon glyphicon-list"></i> <span class="hidden-xs hidden-sm">{{ __('voyager::generic.return_to_list') }}</span>
         </a>
         @endcan
+
+         {{-- download pdf button --}}
+ 
+        <a 
+            class="btn btn-success" 
+            href="{{ URL::to('/order/create-pdf?id='.$dataTypeContent->id) }}"
+        >
+            <i class="voyager-download"></i>  Export PDF
+        </a>
     </h1>
    
     @include('voyager::multilingual.language-selector')
 @stop
 
 @section('content')
+
     <div class="page-content read container-fluid">
        
         <div class="row">
