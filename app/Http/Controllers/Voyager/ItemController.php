@@ -14,4 +14,5 @@ class ItemController extends VoyagerBaseController
         $item ->save();
         return redirect(route('voyager.items.index'));
     }
+
 }

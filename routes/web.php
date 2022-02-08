@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Voyager\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/orders/create-pdf', [OrderController::class, 'getAllOrders']);
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get('items/approve','App\Http\Controllers\Voyager\ItemController@approveItem')->name('items.approve');

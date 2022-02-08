@@ -30,4 +30,9 @@ class Kit extends Model
     {
         return $this->belongsToMany(MyCategory::class, 'category_kit', 'kit_id', 'my_category_id');
     }
+
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class, 'kit_order', 'kit_id', 'order_id');
+    }
 }
