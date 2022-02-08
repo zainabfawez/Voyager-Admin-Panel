@@ -11,7 +11,7 @@
 
 <body class="antialiased container mt-5">
     <div>
-        <img src="http://127.0.0.1:8000/image/logo.png">
+        <img src="E:\xampp\htdocs\myvoyager2\public\image\logo.png">
         <p> {{  now()->toDateTimeString() }} </p>
     </div>
     <div style="width: 100%">
