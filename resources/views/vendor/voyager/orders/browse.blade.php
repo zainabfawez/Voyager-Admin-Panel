@@ -20,8 +20,9 @@
 
         {{-- download pdf button --}}
  
-        <a class="btn btn-primary" href="{{ URL::to('/orders/create-pdf') }}"><i class="voyager-download"></i>  Export PDF</a>
-
+        <a class="btn btn-primary" href="{{ route('orders.create') }}"><i class="voyager-download"></i>  Export PDF</a>
+        <a class="btn btn-success" href="{{ route('file-export') }}">Export data</a>
+        
         @can('edit', app($dataType->model_name))
             @if(!empty($dataType->order_column) && !empty($dataType->order_display_column))
                 <a href="{{ route('voyager.'.$dataType->slug.'.order') }}" class="btn btn-primary btn-add-new">

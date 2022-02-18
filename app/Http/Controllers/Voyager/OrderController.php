@@ -8,6 +8,9 @@ use TCG\Voyager\Http\Controllers\VoyagerBaseController;
 use App\Models\Order;
 use PDF;
 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ordersExport;
+
 class OrderController extends VoyagerBaseController
 {
 
@@ -37,5 +40,14 @@ class OrderController extends VoyagerBaseController
         $pdf_doc = PDF::loadView('show-order', ['order'=>$order]);
         return $pdf_doc->download('order.pdf');
     }
+
+   
+    /**
+    * @return \Illuminate\Support\Collection
+    */
+    public function fileExport() 
+    {   
+        return Excel::download(new OrdersExport, 'orders.xlsx');
+    }    
 
 }

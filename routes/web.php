@@ -18,10 +18,15 @@
         return view('welcome');
     });
 
-    Route::get('/orders/create-pdf', [OrderController::class, 'getAllOrders']);
-    Route::get('/order/create-pdf', [OrderController::class, 'getOrder']);
+  
 
     Route::group(['prefix' => 'admin'], function () {
         Route::get('items/approve','App\Http\Controllers\Voyager\ItemController@approveItem')->name('items.approve');
+        Route::get('/orders/create-pdf', [OrderController::class, 'getAllOrders'])->name('orders.create');
+        Route::get('/order/create-pdf/{id}', [OrderController::class, 'getOrder'])->name('order.create');
         Voyager::routes();
     });
+
+    Route::get('file-export', [OrderController::class, 'fileExport'])->name('file-export');
+  
+   

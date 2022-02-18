@@ -35,7 +35,7 @@
  
         <a 
             class="btn btn-success" 
-            href="{{ URL::to('/order/create-pdf?id='.$dataTypeContent->id) }}"
+            href="{{route('order.create', ['id'=>$dataTypeContent->id]) }}"
         >
             <i class="voyager-download"></i>  Export PDF
         </a>

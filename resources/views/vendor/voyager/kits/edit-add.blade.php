@@ -20,6 +20,7 @@
 @stop
 
 @section('content')
+    
     <div class="page-content edit-add container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -54,7 +55,7 @@
                             @php
                                 $dataTypeRows = $dataType->{($edit ? 'editRows' : 'addRows' )};
                             @endphp
-
+                             
                             @foreach($dataTypeRows as $row)
                                 <!-- GET THE DISPLAY OPTIONS -->
                                 @php
